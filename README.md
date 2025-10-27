@@ -83,7 +83,7 @@ npm run dev
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
-##🦋 Milestones
+## 🦋 Milestones
 
 ✅ Launched full-stack web app
 ✅ Integrated auth, wishlist & payments
@@ -93,7 +93,7 @@ npm run dev
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
-##💫 About Me
+## 💫 About Me
 
 Hi, I’m Shruti Sinha 💕
 A creative full-stack developer who loves turning cozy, aesthetic ideas into real-world products 🌷
