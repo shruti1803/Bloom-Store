@@ -74,22 +74,20 @@ npm run dev
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
 ## 🌷 Future Blooms
-
-💗 AI-powered product recommendations
-🌸 Personalized style profiles
-💌 Newsletter + reward system
-🌈 Social thrift-sharing
-🪩 React Native mobile app
+- 💗 AI-powered product recommendations  
+- 🌸 Personalized style profiles  
+- 💌 Newsletter + reward system  
+- 🌈 Social thrift-sharing  
+- 🪩 React Native mobile app  
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
 ## 🦋 Milestones
-
-✅ Launched full-stack web app
-✅ Integrated auth, wishlist & payments
-✅ Deployed frontend + backend
-✅ 100+ happy customers 🌸
-✅ Ongoing feature updates
+- ✅ Launched full-stack web app  
+- ✅ Integrated auth, wishlist & payments  
+- ✅ Deployed frontend + backend  
+- ✅ 100+ happy customers 🌸  
+- ✅ Ongoing feature updates  
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
