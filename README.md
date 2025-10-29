@@ -5,6 +5,8 @@
   <b>Where every click makes the planet (and your closet) a little happier 🌷</b>
 </p>
 
+<img width="1917" height="1034" alt="Screenshot 2025-10-29 143443" src="https://github.com/user-attachments/assets/2f139418-2eaa-4fbd-95d1-d6cfffb2b516" />
+
 <p align="center">
   <img src="https://img.shields.io/badge/Made%20with-Love-pink?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Frontend-React-pink?style=for-the-badge"/>
