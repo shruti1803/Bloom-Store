@@ -16,6 +16,7 @@ import OrderSuccess from './pages/OrderSuccess';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 import AdminOrders from './pages/AdminOrders';
+import Profile from './pages/Profile';
 
 // Components
 import Navbar from './components/Navbar';
@@ -91,8 +92,17 @@ export default function BloomApp() {
           />
           <Route path="/Wishlist" element={<Wishlist />} />
           <Route path="/Cart" element={<Cart />} />
-        </Routes>
+          <Route 
+          path="/profile" 
+          element={
+          isLoggedIn 
+          ? <Profile /> 
+          : <Login setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />
+          }  
+          />
 
+        </Routes>
+        
         <Chatbot />
       </div>
     </ProductProvider>

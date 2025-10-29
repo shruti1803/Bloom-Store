@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../services/api';
-import { User, MapPin, Phone, Mail, Package, Settings, LogOut, Edit2, Save, X } from 'lucide-react';
+import { User, MapPin, Phone, Mail, Package, Heart, ShoppingCart, Settings, LogOut, Edit2, Save, X, Shield } from 'lucide-react';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -83,9 +83,16 @@ export default function ProfilePage() {
     setIsEditing(false);
   };
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      authAPI.logout();
+      navigate('/login');
+    }
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
       </div>
     );
@@ -96,53 +103,58 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Card */}
+        <div className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl shadow-lg p-8 mb-6 text-white">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-6">
               {/* Profile Avatar */}
-              <div className="w-24 h-24 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-4xl font-bold text-white">
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-4xl font-bold text-pink-600">
                   {user.fullName?.charAt(0).toUpperCase() || 'U'}
                 </span>
               </div>
 
               {/* User Info */}
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">{user.fullName}</h1>
-                <p className="text-gray-600 flex items-center gap-2 mt-1">
+                <h1 className="text-3xl font-bold mb-1">{user.fullName}</h1>
+                <p className="flex items-center gap-2 opacity-90">
                   <Mail size={16} />
                   {user.email}
                 </p>
-                <span className={`inline-block mt-2 px-3 py-1 rounded-full text-sm font-semibold ${
-                  user.role === 'admin' 
-                    ? 'bg-purple-100 text-purple-700' 
-                    : 'bg-pink-100 text-pink-700'
-                }`}>
-                  {user.role === 'admin' ? '👑 Admin' : '🌸 Customer'}
-                </span>
+                <div className="mt-2">
+                  {user.role === 'admin' ? (
+                    <span className="inline-flex items-center gap-1 bg-purple-600 px-3 py-1 rounded-full text-sm font-semibold">
+                      <Shield size={16} />
+                      Administrator
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
+                      🌸 Member
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-2">
+            {/* Quick Actions */}
+            <div className="flex gap-2 flex-wrap">
               {user.role === 'admin' && (
                 <button
                   onClick={() => navigate('/admin')}
-                  className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition"
+                  className="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 backdrop-blur rounded-lg hover:bg-opacity-30 transition font-semibold"
                 >
                   <Settings size={18} />
-                  Admin Panel
+                  <span className="hidden sm:inline">Admin Panel</span>
                 </button>
               )}
               <button
                 onClick={() => navigate('/orders')}
-                className="flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition"
+                className="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 backdrop-blur rounded-lg hover:bg-opacity-30 transition font-semibold"
               >
                 <Package size={18} />
-                My Orders
+                <span className="hidden sm:inline">My Orders</span>
               </button>
             </div>
           </div>
@@ -151,28 +163,28 @@ export default function ProfilePage() {
         {/* Tabs */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="border-b border-gray-200">
-            <div className="flex">
+            <div className="flex overflow-x-auto">
               <button
                 onClick={() => setActiveTab('profile')}
-                className={`flex-1 px-6 py-4 font-semibold transition ${
+                className={`flex items-center gap-2 px-6 py-4 font-semibold transition whitespace-nowrap ${
                   activeTab === 'profile'
                     ? 'bg-pink-50 text-pink-600 border-b-2 border-pink-500'
                     : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                <User className="inline mr-2" size={20} />
+                <User size={20} />
                 Profile Information
               </button>
               <button
                 onClick={() => setActiveTab('settings')}
-                className={`flex-1 px-6 py-4 font-semibold transition ${
+                className={`flex items-center gap-2 px-6 py-4 font-semibold transition whitespace-nowrap ${
                   activeTab === 'settings'
                     ? 'bg-pink-50 text-pink-600 border-b-2 border-pink-500'
                     : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                <Settings className="inline mr-2" size={20} />
-                Account Settings
+                <Settings size={20} />
+                Quick Access
               </button>
             </div>
           </div>
@@ -253,7 +265,7 @@ export default function ProfilePage() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       disabled={!isEditing}
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+91 98765 43210"
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
@@ -269,7 +281,7 @@ export default function ProfilePage() {
                       value={formData.city}
                       onChange={handleInputChange}
                       disabled={!isEditing}
-                      placeholder="New York"
+                      placeholder="Mumbai"
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
@@ -285,7 +297,7 @@ export default function ProfilePage() {
                       value={formData.state}
                       onChange={handleInputChange}
                       disabled={!isEditing}
-                      placeholder="NY"
+                      placeholder="Maharashtra"
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
@@ -293,7 +305,7 @@ export default function ProfilePage() {
                   {/* Zip Code */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Zip Code
+                      Pin Code
                     </label>
                     <input
                       type="text"
@@ -301,7 +313,7 @@ export default function ProfilePage() {
                       value={formData.zipCode}
                       onChange={handleInputChange}
                       disabled={!isEditing}
-                      placeholder="10001"
+                      placeholder="400001"
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
@@ -318,75 +330,131 @@ export default function ProfilePage() {
                     onChange={handleInputChange}
                     disabled={!isEditing}
                     rows="3"
-                    placeholder="123 Main Street, Apt 4B"
+                    placeholder="123 Main Street, Apartment 4B"
                     className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
             )}
 
-            {/* Account Settings Tab */}
+            {/* Quick Access Tab */}
             {activeTab === 'settings' && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Account Settings</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">Quick Access</h2>
 
-                {/* Quick Actions */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Quick Actions Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <button
                     onClick={() => navigate('/orders')}
-                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left"
+                    className="group p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left bg-white"
                   >
-                    <Package className="text-pink-500 mb-3" size={32} />
-                    <h3 className="font-bold text-gray-800 text-lg mb-2">Order History</h3>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-500 transition">
+                        <Package className="text-pink-500 group-hover:text-white transition" size={24} />
+                      </div>
+                      <h3 className="font-bold text-gray-800 text-lg">My Orders</h3>
+                    </div>
                     <p className="text-gray-600 text-sm">View and track your orders</p>
                   </button>
 
                   <button
                     onClick={() => navigate('/wishlist')}
-                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left"
+                    className="group p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left bg-white"
                   >
-                    <svg className="text-pink-500 mb-3" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                    <h3 className="font-bold text-gray-800 text-lg mb-2">My Wishlist</h3>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-500 transition">
+                        <Heart className="text-pink-500 group-hover:text-white transition" size={24} />
+                      </div>
+                      <h3 className="font-bold text-gray-800 text-lg">Wishlist</h3>
+                    </div>
                     <p className="text-gray-600 text-sm">Saved items and favorites</p>
                   </button>
 
                   <button
                     onClick={() => navigate('/cart')}
-                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left"
+                    className="group p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left bg-white"
                   >
-                    <svg className="text-pink-500 mb-3" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="9" cy="21" r="1"></circle>
-                      <circle cx="20" cy="21" r="1"></circle>
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <h3 className="font-bold text-gray-800 text-lg mb-2">Shopping Cart</h3>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-500 transition">
+                        <ShoppingCart className="text-pink-500 group-hover:text-white transition" size={24} />
+                      </div>
+                      <h3 className="font-bold text-gray-800 text-lg">Shopping Cart</h3>
+                    </div>
                     <p className="text-gray-600 text-sm">View items in your cart</p>
                   </button>
 
+                  <button
+                    onClick={() => navigate('/products')}
+                    className="group p-6 border-2 border-gray-200 rounded-xl hover:border-pink-500 hover:shadow-lg transition text-left bg-white"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-500 transition">
+                        <Package className="text-pink-500 group-hover:text-white transition" size={24} />
+                      </div>
+                      <h3 className="font-bold text-gray-800 text-lg">Browse Products</h3>
+                    </div>
+                    <p className="text-gray-600 text-sm">Explore our collection</p>
+                  </button>
+
                   {user.role === 'admin' && (
-                    <button
-                      onClick={() => navigate('/admin')}
-                      className="p-6 border-2 border-purple-200 bg-purple-50 rounded-xl hover:border-purple-500 hover:shadow-lg transition text-left"
-                    >
-                      <Settings className="text-purple-500 mb-3" size={32} />
-                      <h3 className="font-bold text-gray-800 text-lg mb-2">Admin Dashboard</h3>
-                      <p className="text-gray-600 text-sm">Manage products and orders</p>
-                    </button>
+                    <>
+                      <button
+                        onClick={() => navigate('/admin')}
+                        className="group p-6 border-2 border-purple-200 bg-purple-50 rounded-xl hover:border-purple-500 hover:shadow-lg transition text-left"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-500 transition">
+                            <Settings className="text-purple-500 group-hover:text-white transition" size={24} />
+                          </div>
+                          <h3 className="font-bold text-gray-800 text-lg">Admin Panel</h3>
+                        </div>
+                        <p className="text-gray-600 text-sm">Manage products and inventory</p>
+                      </button>
+
+                      <button
+                        onClick={() => navigate('/admin/orders')}
+                        className="group p-6 border-2 border-purple-200 bg-purple-50 rounded-xl hover:border-purple-500 hover:shadow-lg transition text-left"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-500 transition">
+                            <Package className="text-purple-500 group-hover:text-white transition" size={24} />
+                          </div>
+                          <h3 className="font-bold text-gray-800 text-lg">Manage Orders</h3>
+                        </div>
+                        <p className="text-gray-600 text-sm">Process customer orders</p>
+                      </button>
+                    </>
                   )}
+                </div>
+
+                {/* Account Stats */}
+                <div className="mt-8 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-800 text-lg mb-4">Account Overview</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-pink-600">0</div>
+                      <div className="text-sm text-gray-600">Total Orders</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-pink-600">0</div>
+                      <div className="text-sm text-gray-600">Wishlist Items</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-pink-600">0</div>
+                      <div className="text-sm text-gray-600">Cart Items</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-pink-600">₹0</div>
+                      <div className="text-sm text-gray-600">Total Spent</div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Danger Zone */}
                 <div className="mt-8 p-6 border-2 border-red-200 bg-red-50 rounded-xl">
-                  <h3 className="font-bold text-red-800 text-lg mb-4">Danger Zone</h3>
+                  <h3 className="font-bold text-red-800 text-lg mb-4">Account Actions</h3>
                   <button
-                    onClick={() => {
-                      if (window.confirm('Are you sure you want to logout?')) {
-                        authAPI.logout();
-                        navigate('/login');
-                      }
-                    }}
+                    onClick={handleLogout}
                     className="flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-semibold"
                   >
                     <LogOut size={20} />
