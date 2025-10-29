@@ -18,7 +18,7 @@
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
 ## 🌷 About the Project  
-**Bloom Store** is my cozy little **full-stack MERN thrift store**, built to make sustainable fashion fun, personal, and aesthetic 💕  
+**Bloom Store** is my cozy little **full-stack MERN thrift store**, built to make sustainable fashion fun, and personal 💕  
 
 🌸 What started as a side project grew into a daily-use business with **100+ active customers** 🌼  
 It’s a fully functioning e-commerce platform that blends beautiful UI with practical features 🌷  
@@ -30,7 +30,7 @@ It’s a fully functioning e-commerce platform that blends beautiful UI with pra
 
 ✨ **Full Ownership:** Designed, developed, and deployed entirely by me.  
 🌷 **Real Customers:** Serves 100+ happy thrift lovers daily.  
-🎨 **Aesthetic & Responsive:** Minimal, soft, and mobile-friendly UI.  
+🎨 **Responsive:** Minimal, soft, and mobile-friendly UI.  
 🧠 **AI Integration:** Built-in generative chatbot for personalized recommendations.  
 💼 **Recruiter Value:** Demonstrates real-world scalability, creativity, and user empathy.  
 
