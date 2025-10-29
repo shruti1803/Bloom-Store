@@ -25,7 +25,7 @@ It’s a fully functioning e-commerce platform that blends beautiful UI with pra
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
 
-## 💖 Why This Project Matters (For Recruiters!)
+## 💖 Why This Project Matters 
 > _This isn’t just a portfolio piece — it’s a real, used product built from scratch._ 💅  
 
 ✨ **Full Ownership:** Designed, developed, and deployed entirely by me.  
