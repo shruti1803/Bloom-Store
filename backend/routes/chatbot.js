@@ -1,27 +1,35 @@
 const express = require("express");
-const router = express.Router();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const router = express.Router();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-router.post("/chat", async (req, res) => {
+// ✅ Use the correct model name for your SDK version
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+router.post("/", async (req, res) => {
   try {
-    const { message } = req.body;
+    const userMessage = req.body.message || "Hello!";
+    const prompt = `
+You are Bloom's chatbot 💐 — a friendly thrift store assistant.
+Keep replies short, kind, and conversational.
 
-    if (!message) {
-      return res.status(400).json({ error: "Message is required" });
-    }
+User: ${userMessage}
+Bloom:`;
 
-    // ✅ Correct structure for latest SDK
-    const result = await model.generateContent(message);
-    const response = result.response.text();
+    const result = await model.generateContent(prompt);
 
-    res.json({ response });
+    res.json({
+      reply: result.response.text(),
+    });
   } catch (error) {
     console.error("Gemini Error:", error);
     res.status(500).json({
-      error: "AI service unavailable right now.",
+      message: "Gemini Error",
+      details: error.message,
     });
   }
 });

@@ -14,6 +14,7 @@ const Chatbot = () => {
   const getAIResponse = async (userMessage) => {
     try {
       const response = await fetch('/api/chatbot/chat', {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage }),
