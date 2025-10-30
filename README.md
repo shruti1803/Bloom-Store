@@ -54,8 +54,8 @@ It’s a fully functioning e-commerce platform that blends beautiful UI with pra
 | 💕 Frontend | React, Tailwind CSS |
 | 🌸 Backend | Node.js, Express.js |
 | 🌷 Database | MongoDB, Mongoose |
-| 💫 Auth | JWT, bcrypt |
-| 🧠 AI | OpenAI API |
+| 💫 Auth | JWT |
+| 🧠 AI | Gemini API |
 | ☁️ Deployment | Render + Netlify |
 
 <p align="center">─────────────── ⋆⋅🌸⋅⋆ ───────────────</p>
