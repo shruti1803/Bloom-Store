@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://bloom-store-backend.onrender.com"
+    : "http://localhost:5000";
 
 // Get token from localStorage
 const getToken = () => localStorage.getItem('token');
